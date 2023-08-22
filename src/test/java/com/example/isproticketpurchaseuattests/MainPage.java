@@ -36,7 +36,7 @@ public class MainPage {
 
   public SelenideElement selectFirstClass = $x("//select[@id='Class']/option[text()='1. razred']");
 
-  public SelenideElement freeReservationSpot = $x("//div[@class='seatDiv seat free']");
+  public SelenideElement freeReservationSpot = $x("//div[contains(@class, 'free')]");
 
   public SelenideElement freeReservationCouchetteSpot = $x("//div[@class='seatDiv Lining free']");
 
