@@ -61,4 +61,8 @@ public class MainPage {
 
   public SelenideElement selectTrain985 = $x("//a[@detailsid='985']/parent::div/parent::div//button[@id='outwardJourneySelectDep']");
 
+  public SelenideElement selectTrain545 = $x("//a[@detailsid='545']/parent::div/parent::div//button[@id='outwardJourneySelectDep']");
+
+  public SelenideElement selectNoReservation = $x("//input[@class='checkboxNoReservations']");
+
 }
