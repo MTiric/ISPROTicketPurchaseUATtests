@@ -1,0 +1,161 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<title>Scheidt&amp;Bachmann FareGoData</title>	
+		<meta http-equiv="content-type" content="text/html;charset=windows-1250">
+	</head>
+	<body>
+		<div id="world_bg"></div>
+		<div id="header">
+			<div class="content_width"><div id="sb_logo"></div><div id="header_right"><div id="app_logo"></div></div></div>
+		</div>
+		<div id="subheader"><div class="content_width"><span id="clock">12:55:45 Srijeda 30.08.2023</span></div></div>
+		<div id="content_area" class="content_width">
+			<div id="content_left" class="float_left">
+				<h1>Dobro došli</h1>
+				<p>Pritisnite donji gumb kako biste pokrenuli FareGoData.<br>Za promjenu jezika, odaberite odgovarajucu zastavicu.</p>
+				<a id="btnStart" href="programmanager_hr_HR.jnlp" class="button"><span class="heading">Pokreni FareGoData</span><span class="explanation">Pokrece FareGoData pozadinski sustav</span></a>
+			</div>
+			<div id="content_right" class="float_right">
+				<div id="infobox_top"><h3>Informacije o sustavu</h3></div>
+				<div id="infobox_middle">
+					<div id="warningbox" style="display: none;">
+			  		   <div class="warning top"></div>
+					   <div class="warning middle">
+						  <img src="img/warning_16.png" class="float_left" border="0" alt="warning">
+						  <p>Potrebno je instalirati JRE. Molimo preuzmite jednu od sljedecih verzija.</p>
+					   </div>
+					   <div class="warning bottom"></div>
+					</div>
+					<ul class="downloads">
+						<li id="download64"><a href="http://www.java.com/en/download/windows_xpi.jsp">Preuzmite Java (JRE)</a></li>
+					</ul>
+					<ul class="info">
+						<li><span class="label">Operativni sustav:</span><span class="value" id="info_os">Windows</span></li>		
+						<li><span class="label">Preglednik:</span><span class="value" id="info_browser">Chrome 32bit</span></li>		
+					</ul>
+				</div>
+			</div>
+			<div class="clear_both"></div>
+		</div>
+		<div id="footer"><div class="content_width">
+			<ul id="language" class="float_right">
+				<li class="label"> Jezik:</li>
+
+				<li><a id="lang_en_GB" href="index?lang=en_GB"></a></li>
+
+				<li><a id="lang_de_DE" href="index?lang=de_DE"></a></li>
+
+				<li><a id="lang_hr_HR" class="active"></a></li>
+
+			</ul></div></div>
+
+
+  <script type="text/javascript">
+    	// ################################# determine os ################################# 
+		var OSName="Unknown OS";
+		if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+		if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+		if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+		if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+    	// ################################# determine os ################################# 
+		var platform="32bit";
+		if (navigator.platform.indexOf("64")!=-1) platform="64bit";
+		// ################################# determine browser ################################# 
+		var nVer = navigator.appVersion;
+		var nAgt = navigator.userAgent;
+		var browserName  = navigator.appName;
+		var fullVersion  = ''+parseFloat(navigator.appVersion); 
+		var majorVersion = parseInt(navigator.appVersion,10);
+		var nameOffset,verOffset,ix;
+		
+		// In Opera, the true version is after "Opera" or after "Version"
+		if ((verOffset=nAgt.indexOf("Opera"))!=-1) {
+		 browserName = "Opera";
+		 fullVersion = nAgt.substring(verOffset+6);
+		 if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+		   fullVersion = nAgt.substring(verOffset+8);
+		}
+		// In MSIE, the true version is after "MSIE" in userAgent
+		else if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
+		 browserName = "MS IExplorer";
+		 fullVersion = nAgt.substring(verOffset+5);
+		}
+		// In Chrome, the true version is after "Chrome" 
+		else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
+		 browserName = "Chrome";
+		 fullVersion = nAgt.substring(verOffset+7);
+		}
+		// In Safari, the true version is after "Safari" or after "Version" 
+		else if ((verOffset=nAgt.indexOf("Safari"))!=-1) {
+		 browserName = "Safari";
+		 fullVersion = nAgt.substring(verOffset+7);
+		 if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+		   fullVersion = nAgt.substring(verOffset+8);
+		}
+		// In Firefox, the true version is after "Firefox" 
+		else if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+		 browserName = "Firefox";
+		 fullVersion = nAgt.substring(verOffset+8);
+		}
+		// In most other browsers, "name/version" is at the end of userAgent 
+		else if ( (nameOffset=nAgt.lastIndexOf(' ')+1) < (verOffset=nAgt.lastIndexOf('/')) ) 
+		{
+		 browserName = nAgt.substring(nameOffset,verOffset);
+		 fullVersion = nAgt.substring(verOffset+1);
+		 if (browserName.toLowerCase()==browserName.toUpperCase()) {
+		  browserName = navigator.appName;
+		 }
+		}
+		// trim the fullVersion string at semicolon/space if present
+		if ((ix=fullVersion.indexOf(";"))!=-1) fullVersion=fullVersion.substring(0,ix);
+		if ((ix=fullVersion.indexOf(" "))!=-1) fullVersion=fullVersion.substring(0,ix);
+		
+		majorVersion = parseInt(''+fullVersion,10);
+		if (isNaN(majorVersion)) {
+		 fullVersion  = ''+parseFloat(navigator.appVersion); 
+		 majorVersion = parseInt(navigator.appVersion,10);
+		}
+		// ################################# show infos ################################# 
+    document.getElementById("info_os").innerHTML=OSName;
+    document.getElementById("info_browser").innerHTML=browserName + " " + platform;
+	      document.getElementById("btnStart").disabled=false;
+      document.getElementById("warningbox").style.display="none";
+
+	setInterval("settime()", 1000);
+	
+	function zeroPad(num, count) { 
+		var numZeropad = num + '';
+		while(numZeropad.length < count) {
+			numZeropad = "0" + numZeropad; 
+		}
+		return numZeropad;
+	}
+	
+	function settime () {
+	  var curtime = new Date();
+	  var curhour = zeroPad(curtime.getHours(),2);
+	  var curmin = zeroPad(curtime.getMinutes(),2);
+	  var cursec = zeroPad(curtime.getSeconds(),2);
+	  var month = zeroPad(curtime.getMonth() + 1,2);
+	  var day = zeroPad(curtime.getDate(),2);
+	  var year = zeroPad(curtime.getFullYear(),2);
+	  var weekday=new Array(7);
+	  weekday[0]="Nedjelja";
+	  weekday[1]="Ponedjeljak";
+	  weekday[2]="Utorak";
+	  weekday[3]="Srijeda";
+	  weekday[4]="Četvrtak";
+	  weekday[5]="Petak";
+	  weekday[6]="Subota";
+	  var wday = weekday[curtime.getDay()];
+
+	  var time = curhour + ":" + curmin + ":" + cursec + " " + wday + " " + day + "." + month + "." + year;
+	 
+	  document.getElementById("clock").innerHTML = time;
+	}
+  </script>
+
+	
+
+</body></html>

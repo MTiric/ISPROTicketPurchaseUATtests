@@ -21,7 +21,7 @@ public class MainPageTest {
     MainPage mainPage = new MainPage();
     String urlMain = "https://prodaja-test.hzpp.hr/";
 
-
+    SoftAssert softAssert = new SoftAssert();
 
     @BeforeAll        public static void setUpAll() {
         Configuration.browserSize = "1280x800";
@@ -39,7 +39,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeNormalnaKarta() {
-        SoftAssert softAssert = new SoftAssert();
+
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -89,7 +89,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeNormalnaKarta() {
-        SoftAssert softAssert = new SoftAssert();
+
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -140,7 +140,6 @@ public class MainPageTest {
     }
     @Test
     public void jednosmjernoPutovanjeSviVlakovi() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -190,7 +189,6 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeSviVlakovi() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -241,7 +239,6 @@ public class MainPageTest {
     }
     @Test
     public void jednosmjernoPutovanjeTriPutnika() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -291,7 +288,6 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeTriPutnika() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -344,7 +340,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeSestPutnika() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -400,7 +395,6 @@ public class MainPageTest {
     }
     @Test
     public void povratnoPutovanjeSestPutnika() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -459,7 +453,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeDodatniPutnikDrugiPopust() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -510,7 +503,6 @@ public class MainPageTest {
     }
     @Test
     public void povratnoPutovanjeDodatniPutnikDrugiPopust() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -564,7 +556,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeRezervacijaPrviRazred() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -618,7 +609,6 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeRezervacijaPrviRazred() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -676,7 +666,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeRezervacijaMjestaBicikla() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -733,7 +722,6 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeRezervacijaMjestaBicikla() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -797,7 +785,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjePopustStudent() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -848,7 +835,6 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjePopustStudent() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -902,7 +888,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjePopustMladi() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -953,7 +938,6 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjePopustMladi() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1006,7 +990,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjePopustUmirovljenik() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1057,7 +1040,6 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjePopustUmirovljenik() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1110,7 +1092,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeRezervacijaLezaj() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1163,7 +1144,6 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeRezervacijaLezaj() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1220,7 +1200,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeOpcionalnaRezervacija_BEZ() {
-        SoftAssert softAssert = new SoftAssert();
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1247,6 +1226,162 @@ public class MainPageTest {
         //assert should come here
 
         mainPage.continueReservation.click();
+        UserDataNoRegistration.fillInfo();
+        //assert should come here
+
+        $("#GeneralConditionsOfSale").click();
+        $("#SubmitForm").click();
+        //assert should come here
+
+        PayWayInfo.fillInfo();
+
+        //assert should come here
+
+        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
+        String titleConfirmationText = titleConfirmation.getText();
+        System.out.println(titleConfirmationText);
+        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+
+        $x("//input[@id='pdfBtn']").click();
+
+
+        sleep(5000);
+        softAssert.assertAll();
+
+
+    }
+
+    @Test
+    public void povratnoPutovanjeOpcionalnaRezervacija_BEZ() {
+
+
+        $("#searchViewWrapper").shouldBe(visible);
+        $("#returnJourneyRadio").click();
+        ParametriPretrage.fillData("Zagreb Glavni kol.", "Vinkovci");
+        System.out.println(DifferentDateTime.returnFuture(1));
+        SetDateOutward.setDate(1);
+        SetDateReturn.setDate(2);
+
+        //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
+        mainPage.pretrazi.click();
+
+        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Vinkovci']");
+        String searchRelationActualResult = searchRelation.getText();
+        System.out.println(searchRelationActualResult);
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Vinkovci", "Relation is not matching" );
+        //assert should come here
+        mainPage.selectTrain545.click();
+        mainPage.selectTrain542.click();
+        //assert should come here
+
+
+        $("#ContinueBtn").click();
+        //assert should come here
+
+        mainPage.selectNoReservation.click();
+        mainPage.selectNoReservationReturn.click();
+        mainPage.continueReservation.click();
+
+        UserDataNoRegistration.fillInfo();
+        //assert should come here
+
+        $("#GeneralConditionsOfSale").click();
+        $("#SubmitForm").click();
+        //assert should come here
+
+
+        PayWayInfo.fillInfo();
+        //assert should come here
+
+        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
+        String titleConfirmationText = titleConfirmation.getText();
+        System.out.println(titleConfirmationText);
+        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+
+        $x("//input[@id='pdfBtn']").click();
+
+
+        sleep(5000);
+        softAssert.assertAll();
+
+
+    }
+    @Test
+    public void jednosmjernoPutovanjeRegistriraniKorisnik() {
+
+
+        $("#searchViewWrapper").shouldBe(visible);
+        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
+        System.out.println(DifferentDateTime.returnFuture(1));
+        SetDateOutward.setDate(1);
+
+        //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
+        mainPage.pretrazi.click();
+
+        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
+        String searchRelationActualResult = searchRelation.getText();
+        System.out.println(searchRelationActualResult);
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        //assert should come here
+
+        mainPage.firstOdaberiButton.click();
+        //assert should come here
+
+        $("#ContinueBtn").click();
+        //assert should come here
+
+        UserDataRegistration.fillInfo();
+        //assert should come here
+
+        $("#GeneralConditionsOfSale").click();
+        $("#SubmitForm").click();
+        //assert should come here
+
+        PayWayInfo.fillInfo();
+
+        //assert should come here
+
+        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
+        String titleConfirmationText = titleConfirmation.getText();
+        System.out.println(titleConfirmationText);
+        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+
+        $x("//input[@id='pdfBtn']").click();
+
+
+        sleep(5000);
+        softAssert.assertAll();
+
+
+    }
+
+    @Test
+    public void jednosmjernoPutovanjeRezervacijaSjedecMjesta() {
+
+
+        $("#searchViewWrapper").shouldBe(visible);
+        ParametriPretrage.fillData("Zagreb Glavni kol.", "Split");
+        System.out.println(DifferentDateTime.returnFuture(1));
+        SetDateOutward.setDate(1);
+
+        //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
+        mainPage.pretrazi.click();
+
+        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
+        String searchRelationActualResult = searchRelation.getText();
+        System.out.println(searchRelationActualResult);
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching" );
+        //assert should come here
+
+        mainPage.selectTrain523.click();
+        //assert should come here
+
+        $("#ContinueBtn").click();
+        //assert should come here
+
+        mainPage.freeReservationSeat.click();
+        mainPage.continueReservation.click();
+
         UserDataNoRegistration.fillInfo();
         //assert should come here
 

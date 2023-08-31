@@ -42,6 +42,7 @@ public class MainPage {
 
   public SelenideElement freeReservationSpotReturn = $x("//div[@class='panel panel-default'][last()]//div[@class='seatDiv seat free']");
 
+  public SelenideElement freeReservationSeat = $x("//div[@class='seatDiv seat free']");
   public SelenideElement freeReservationCouchetteSpotReturn = $x("//div[@class='panel panel-default'][last()]//div[@class='seatDiv Lining free']");
   public SelenideElement continueReservation = $x("//a[@id='reservationSubmitBtn']");
 
@@ -63,6 +64,11 @@ public class MainPage {
 
   public SelenideElement selectTrain545 = $x("//a[@detailsid='545']/parent::div/parent::div//button[@id='outwardJourneySelectDep']");
 
+  public SelenideElement selectTrain542 = $x("//a[@detailsid='542']/parent::div/parent::div//button[@id='outwardJourneySelectDep']");
+
+  public SelenideElement selectTrain523 = $x("//a[@detailsid='523']/parent::div/parent::div//button[@id='outwardJourneySelectDep']");
   public SelenideElement selectNoReservation = $x("//input[@class='checkboxNoReservations']");
+
+  public SelenideElement selectNoReservationReturn = $x("//div[@class='panel panel-default'][last()]//input[@class='checkboxNoReservations']");
 
 }
