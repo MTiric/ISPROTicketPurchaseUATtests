@@ -1,0 +1,297 @@
+<html lang="{{UI.Language.LangCode}}" ng-app="paymentForm" ng-controller="paymentFormCtrl"><head>
+    <meta charset="utf-8">
+    <title>HT PayWay</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="HT PayWay">
+    <meta property="og:title" content="HT PayWay online naplata">
+    <meta property="og:description" content="PayWay je virtualni POS sustav za autorizaciju i naplatu putem interneta uz maksimalnu sigurnost online plaćanja za web prodajna mjesta.">
+    <meta property="og:image" content="https://formtest.payway.com.hr/assets/payment-form/images/PayWay-logo-1200x630.png">
+    <link rel="preload" as="image" href="/assets/payment-form/images/payment-type-selector-icons.png">
+    <script type="text/javascript" src="/payment-form-view-model?key=tOPEyZex-kSRtAGrJgeoBA"></script>
+    <link rel="apple-touch-icon-precomposed" href="/assets/payment-form/images/PayWay-appleTouch-icon.png">
+    <link rel="icon" href="/assets/payment-form/PayWay-favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+    
+    
+        <link rel="stylesheet" href="/css/payment-form/PayWay-form-styles.min.css?v=5RnkvxxJOJCRMPTWd_n-xgj56YspH8aidRXU2T3ZPTI">
+    
+    
+        <script src="/assets/shared/js/lib/sentry/sentry-bundle.min.js"></script>
+        <script type="text/javascript">
+            Sentry.init({ dsn: 'https://0e1e5dd501634a10bc3a227d4425bc0c@o316986.ingest.sentry.io/5338531' });
+        </script>
+    
+    
+</head>
+<body class="overflow-hidden {{Shop.ShopID}} {{UI.Design.DesignType}}Design" ng-class="getBodyClass()">
+    <div id="DefaultPreLoader" class="form-preloader">
+    <div class="form-preloader-wrapper">
+        <div class="spinner-sm"></div>
+        <div class="preloader-text">
+            <span><i></i><i></i><i></i></span>
+        </div>
+    </div>
+</div>
+
+
+    <div ng-cloak="" class="pg-page-wrapper">
+        <div class="container pg-main-container">
+            <div class="pg-content-wrapper">
+                <h1 id="pg-main-page-title" class="sr-only sr-only-focusable" translate="" translate-values="{ipgProviderName: 'HT PayWay'}">PaymentFormHeading</h1>
+                <header class="pg-header" role="banner">
+                    <div class="row pg-header-row">
+                        <div class="col-md-3 pg-logo-box" ng-if="UI.Design.ShowLogo">
+                            <span title="{{Shop.Name}}" class="pg-logo"><img ng-src="{{UI.LogoUrl != null ? UI.LogoUrl : '/assets/payment-form/images/PayWay-logo.png'}}" alt="{{Shop.Name}} logo"></span>
+                        </div>
+                        <div class="col-md-6 pg-shop-info" ng-if="UI.Design.ShowShopName || UI.Design.ShowShoppingCartID">
+                            <div class="pg-shop-info-box">
+                                <p class="pg-shop-name" ng-if="UI.Design.ShowShopName">{{Shop.Name}}</p>
+                                <p class="pg-order-id" ng-if="UI.Design.ShowShoppingCartID"><span translate="">OrderNo</span>: {{Transaction.ShoppingCartID}}</p>
+                            </div>
+                        </div>
+                        <div class="pg-dropdown-selector pg-lang-selector-box" ng-if="UI.Design.ShowLanguageSelector">
+                            <label id="pg-language-combobox" for="language_selector" class="sr-only sr-only-focusable" translate="">LanguageSelector</label>
+                            <select selectpicker="{selectOnTab: true}" name="language_selector" id="language_selector" class="form-control pg-form-select" ng-options="language as language.CountryCode for language in UI.Languages" ng-model="UI.Language" ng-change="changeLanguage()" aria-labelledby="pg-language-combobox">
+                            </select>
+                        </div>
+                    </div>
+                </header>
+                <section class="pg-order-amount-row" role="region" aria-label="{{'OrderAmountRegionDescription' | translate}}" ng-if="UI.Design.ShowTotalAmount || Configuration.SessionTimeoutInSeconds != null">
+                    <div class="pg-order-amount no-card-discount" ng-if="UI.Design.ShowTotalAmount">
+                        <p class="pg-order-amount-title" translate="">Amount</p>
+                        <span class="pg-amount-primary">{{Transaction.TotalAmountInShopCurrency}}</span> <span class="pg-amount-secondary" ng-if="Transaction.InformativeAmounts">{{Transaction.InformativeAmounts}}</span>
+                    </div>
+                    <div class="pg-countdown-box" ng-show="Configuration.SessionTimeoutInSeconds != null"><a href="#" class="show-more-info" data-toggle="modal" data-target=".what-is-countdown" title="{{'CountdownTitle' | translate}}"><span class="sr-only sr-only-focusable" translate="">CountdownDescription</span><i class="icomoon pg-clock"></i></a> <span></span></div>
+                </section>
+                <form name="paymentForm" novalidate="" ng-submit="initiateCreditCardPayment(paymentForm, '/execute-credit-card-transaction')" ng-class="{'form-submitted':paymentForm.$submitted}" accessible-form="">
+                    <section class="pg-payment-row" role="main" aria-label="{{'PaymentForm' | translate}}">
+                        <div class="row">
+                            <div class="col pg-alerts">
+                                <!-- Payment initiated errors -->
+                                <div class="alert pg-alert-danger" role="alert" ng-if="PaymentInitiatedErrors.length > 0 || Transaction.UnsuccessfulPreviousPaymentAttempt" scroll-top="">
+                                    <span ng-if=" Transaction.UnsuccessfulPreviousPaymentAttempt" translate="">UnsuccessfulPreviousPaymentAttempt</span>
+                                    <span ng-repeat="error in PaymentInitiatedErrors" class="d-block" ng-bind-html="error.Message"></span>
+                                </div>
+                                <div class="alert pg-alert-info" role="alert" ng-if="Transaction.TokenizeCreditCard &amp;&amp; UI.Design.ShowCustomerInformation" translate="">TokenizeCreditCardMessage</div>
+                                <div class="alert pg-alert-tokenized" role="alert" ng-if="Transaction.TokenPayment" translate="">TokenPaymentMessage</div>
+                            </div>
+
+                            <div class="col-md-6 order-md-3 pg-payment-box">
+                                <div class="pg-payment-form">
+                                    <div class="form-group pg-form-group" ng-if="Shop.PaymentMethods.length > 1">
+                                        <span ng-if="Shop.PaymentMethods.length == 1" class="pg-payment-type-selector-value"><i class="icomoon pg-{{Shop.PaymentMethods[0].IconClass}}"></i> <span translate="">{{Shop.PaymentMethods[0].Type + 'PaymentMethodName'}}</span></span>
+                                        <div class="pg-dropdown-selector pg-payment-type-selector hide-first-payment-method">
+                                            <label id="pg-payment-type-combobox" for="payment_type_selector" class="sr-only sr-only-focusable" translate="">PaymentMethodSelector</label>
+                                            <select select-picker-refresh="UI.Language" selectpicker="{ iconBase: 'icomoon', selectOnTab: true }" name="payment_type_selector" id="payment_type_selector" class="pg-form-select" ng-model="Transaction.PaymentMethod" aria-labelledby="pg-payment-type-combobox" ng-change="onPaymentMethodChanged(paymentForm)">
+                                                <option value="" translate="">SelectPaymentMethod</option>
+                                                <option data-icon="pg-{{paymentMethod.IconClass}}" ng-value="paymentMethod" ng-repeat="paymentMethod in Shop.PaymentMethods" translate="">{{paymentMethod.Type + 'PaymentMethodName'}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div ng-if="!Transaction.PaymentMethod" class="payment-not-selected-wrapper collapse-group">
+                                        <div class="pg-payment-type-selector pg-payment-multi-type" ng-repeat="paymentMethod in getMultiTypePaymentMethods()">
+                                            <a ng-repeat="paymentTypeGroup in paymentMethod.PaymentTypeGroups" href="" ng-click="setPaymentMethod(paymentMethod)"><img ng-src="/assets/payment-form/images/payment-info/{{paymentTypeGroup.Id | lowercase}}.png?v=638291232000000000" alt="{{paymentTypeGroup.Id}} logo"></a>
+                                        </div>
+                                        <div class="pg-payment-type-selector pg-payment-single-type" ng-if="getSingleTypePaymentMethods().length > 0">
+                                            <a ng-repeat="paymentMethod in getSingleTypePaymentMethods()" href="" class="pg-logo-{{paymentMethod.Type | lowercase}}" ng-click="setPaymentMethod(paymentMethod)"><img ng-src="/assets/payment-form/images/payment-info/{{paymentMethod.Type | lowercase}}-logo.png?v=638291232000000000" alt="{{paymentMethod.Type}} logo"></a>
+                                        </div>
+                                    </div>
+                                        <div class="card-payment-wrapper collapse-group collapse" collapse="Transaction.PaymentMethod.Type != 'CreditCard'" ng-if="Transaction.PaymentMethod.Type == 'CreditCard'">
+                                            <h2 class="sr-only sr-only-focusable" translate="">CreditOrDebitCardPayment</h2>
+                                            <div class="row">
+                                                <div class="col-sm-6 form-group pg-form-group">
+                                                    <div class="pg-form-group-static">
+                                                        <label for="creditCardNumber" class="pg-label" translate="">CreditCardNumber</label>
+                                                        <input numbers-only="" ng-if="!Transaction.TokenPayment" type="tel" class="form-control pg-form-control creditCardNumber" name="creditCardNumber" id="creditCardNumber" translate-attr="{placeholder:'CreditCardNumberPlaceholder'}" pattern="[0-9]*" maxlength="19" inputmode="numeric" required="" ui-validate="{valid:'validateCreditCardNumber(Transaction)'}" ng-model-options="{ allowInvalid: true }" ng-model="Transaction.CreditCardInformation.CardNumber">
+                                                        <span ng-if="Transaction.TokenPayment" class="pg-field-value">{{Transaction.CreditCardInformation.CardNumberMasked}}</span>
+                                                        <div class="validation-tooltip" ng-if="paymentForm.creditCardNumber.$error.required"><em translate="">CreditCardNumberRequiredError</em></div>
+                                                        <div class="validation-tooltip" ng-if="!paymentForm.creditCardNumber.$error.required &amp;&amp; paymentForm.creditCardNumber.$error.valid"><em translate="">CreditCardNumberInvalidError</em></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 form-group pg-form-group">
+                                                    <div class="availableCreditCards" ng-class="{'shrink-to-fit':getCreditCardPaymentGroups().length > 6}">
+                                                        <div class="cards-wrapper" ng-class="getAvailableCreditCardsWrapperClass(Transaction)">
+                                                            <img ng-repeat="creditCardPaymentGroup in getCreditCardPaymentGroups()" ng-src="/assets/payment-form/images/payment-info/{{creditCardPaymentGroup.Id | lowercase}}.png" alt="{{creditCardPaymentGroup.Id}} logo" class="acc-{{creditCardPaymentGroup.Id | lowercase}}" ng-class="getCreditCardPaymentGroupImageClass(creditCardPaymentGroup.Id, Transaction)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 form-group pg-form-group">
+                                                    <div class="pg-form-group-static">
+                                                        <label for="exp_date" class="pg-label" translate="">CreditCardExpirationDate</label>
+                                                        <input ng-if="!Transaction.TokenPayment" type="tel" class="form-control pg-form-control" name="creditCardExpirationDate" id="exp_date" maxlength="5" autocomplete="off" placeholder="MM/YY" mask="19/99" mask-clean="true" mask-restrict="reject" ui-validate="{valid:'validateCreditCardExpirationDate(Transaction)'}" ng-model-options="{ allowInvalid: true }" ng-model="Transaction.CreditCardInformation.CardExpirationDate">
+                                                        <span ng-if="Transaction.TokenPayment" class="pg-field-value">{{Transaction.CreditCardInformation.CardExpirationDate}}</span>
+                                                        <div class="validation-tooltip" ng-if="paymentForm.creditCardExpirationDate.$error.valid"><em translate-attr="{title:'CreditCardExpirationDateError'}" translate="">CreditCardExpirationDateError</em></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 form-group pg-form-group">
+                                                    <div class="pg-form-group-static">
+                                                        <label for="cvv_code" class="pg-label"><span translate="">CreditCardVerificationData</span> <a href="#" class="show-more-info" data-toggle="modal" data-target=".what-is-cvv-modal" title="{{'WhatIsCVVTitle' | translate}}"><span class="sr-only sr-only-focusable" translate="">WhatIsCVVDescription</span><i class="icomoon pg-info"></i></a> <a ng-if="isCreditCardPaymentGroupSelected(Transaction, 'Diners') || isCreditCardPaymentGroupSelected(Transaction, 'DCRCC')" href="#" class="show-more-info diners-3ds" data-toggle="modal" data-target=".diners-3ds-eccmobile-mtoken" title="{{'Diners3DSECCMobileTitle' | translate}}"><span class="sr-only sr-only-focusable" translate="">Diners3DSECCMobileTitle</span><i class="icomoon pg-shield"></i>{{'Important' | translate}}</a></label>
+                                                        <input numbers-only="" type="tel" inputmode="numeric" class="form-control pg-form-control" name="creditCardVerificationData" id="cvv_code" placeholder="xxx(x)" pattern="[0-9]*" maxlength="4" ui-validate-watch="'Transaction.CreditCardInformation.CardNumber'" ui-validate="{valid:'validateCreditCardVerificationData(Transaction)'}" ng-model-options="{ allowInvalid: true }" ng-model="Transaction.CreditCardInformation.CardVerificationData">
+                                                        <div class="validation-tooltip" ng-if="paymentForm.creditCardVerificationData.$error.valid"><em translate="">CreditCardVerificationDataError</em></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" ng-if="showPaymentPlanOptions(Transaction)">
+                                                <div class="col-md-6 form-group pg-form-group" ng-if="installmentsAvailable(Transaction)">
+                                                    <div class="pg-form-group-static">
+                                                        <label for="instalments_selector" class="pg-label"><span translate="">NumberOfInstallments</span> <a href="#" class="show-more-info" data-toggle="modal" data-target=".instalments-modal" title="{{'InstallmentsTitle' | translate}}"><span class="sr-only sr-only-focusable" translate="">InstallmentsDescription</span><i class="icomoon pg-info"></i></a></label>
+                                                        <span ng-if="Transaction.PaymentPlan.ValueSpecified" class="pg-field-value">{{Transaction.PaymentPlan.NumberOfInstallments == 1 ? ('SingleInstallment' | translate) : Transaction.PaymentPlan.NumberOfInstallments }}</span>
+                                                        <div ng-if="!Transaction.PaymentPlan.ValueSpecified" class="pg-dropdown-selector pg-selector-box">
+                                                            <span id="pg-instalments-combobox" class="sr-only sr-only-focusable" translate="">InstallmentsSelector</span>
+                                                            <select select-picker-refresh="UI.Language" selectpicker="{ iconBase: 'icomoon', selectOnTab: true }" name="numberOfInstallments" id="instalments_selector" class="pg-form-select" ng-model="Transaction.PaymentPlan.NumberOfInstallments" aria-labelledby="pg-instalments-combobox">
+                                                                <option ng-repeat="n in getAvailableInstallments(Transaction)" ng-value="n">{{n == 1 ? ('SingleInstallment' | translate) : n}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 form-group pg-form-group" ng-if="gracePeriodsAvailable(Transaction)">
+                                                    <div class="pg-form-group-static">
+                                                        <label for="instalments_graceperiod_selector" class="pg-label"><span translate="">GracePeriod</span> <a href="#" class="show-more-info" data-toggle="modal" data-target=".instalments-graceperiod-modal" title="{{'GracePeriodTitle' | translate}}"><span class="sr-only sr-only-focusable" translate="">GracePeriodDescription</span><i class="icomoon pg-info"></i></a></label>
+                                                        <span ng-if="Transaction.PaymentPlan.ValueSpecified" class="pg-field-value">{{Transaction.PaymentPlan.GracePeriod}}</span>
+                                                        <div ng-if="!Transaction.PaymentPlan.ValueSpecified" class="pg-dropdown-selector pg-selector-box">
+                                                            <span id="pg-instalments-graceperiod-combobox" class="sr-only sr-only-focusable" translate="">GracePeriodSelector</span>
+                                                            <select select-picker-refresh="UI.Language" selectpicker="{ iconBase: 'icomoon', selectOnTab: true }" name="gracePeriod" id="instalments_graceperiod_selector" class="pg-form-select" ng-model="Transaction.PaymentPlan.GracePeriod" aria-labelledby="pg-instalments-graceperiod-combobox">
+                                                                <option ng-repeat="n in getAvailableGracePeriods(Transaction)" ng-value="n">{{n == 0 ? ('WithoutGracePeriod' | translate) : n}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="paymentPlan" ng-model="pp" ui-validate-watch="'Transaction.CreditCardInformation.CardNumber'" ui-validate="{valid:'validatePaymentPlan(Transaction)'}">
+                                                <div class="col pg-alerts" ng-if="paymentForm.paymentPlan.$error.valid">
+                                                    <div class="alert pg-alert-danger" role="alert" translate="">SelectedPaymentPlanIsNotAvailableForGivenCreditCard</div>
+                                                </div>
+                                            </div>
+                                            <div class="row" ng-if="Transaction.RecurringInformation != null">
+                                                <div class="col-md-12 form-group pg-form-group">
+                                                    <div class="pg-form-group-static">
+                                                        <label class="pg-label" translate="">RecurringPayment</label>
+                                                        <span class="pg-field-value" ng-bind-html="getRecurringPaymentInfo(Transaction)"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-12 order-md-6 collapse-group collapse pg-payment-buttons-wrapper pg-no-payment-buttons" collapse="Transaction.PaymentMethod.Type != null">
+                                <div class="row">
+                                    <div class="col-auto"><button class="btn btn-pg-default" type="button" ng-click="cancelPayment()" translate="">CancelAction</button></div>
+                                </div>
+                            </div>
+                            <div ng-if="UI.Design.ShowCustomerInformation" class="col-12 order-md-1 pg-customer-form-title-box">
+                                <div class="pg-customer-form-title">
+                                    <p translate="">{{Transaction.PaymentMethod.Type != 'CreditCard' ? 'CustomerInformationSectionTitleNonCreditCardPayment' : 'CustomerInformationSectionTitle'}}</p>
+                                </div>
+                            </div>
+                            <div ng-if="UI.Design.ShowCustomerInformation" class="col-md-6 order-md-2">
+                                <div class="pg-customer-form">
+                                    <div class="row">
+                                        <div class="col-md-6 form-group pg-form-group">
+                                            <div class="pg-form-group-animated">
+                                                <label for="customer_name" class="pg-label" translate="">CustomerFirstName</label>
+                                                <input type="text" maxlength="50" form-control="" class="form-control pg-form-control" id="customer_name" name="customerFirstName" ng-required="Transaction.CustomerInformation.InformationIsMandatory" ng-model="Transaction.CustomerInformation.FirstName">
+                                                <div ng-if="paymentForm.customerFirstName.$error.required" class="validation-tooltip"><em translate="">CustomerFirstNameError</em></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group pg-form-group">
+                                            <div class="pg-form-group-animated">
+                                                <label for="customer_surname" class="pg-label" translate="">CustomerLastName</label>
+                                                <input type="text" maxlength="50" form-control="" class="form-control pg-form-control" id="customer_surname" name="customerLastName" ng-required="Transaction.CustomerInformation.InformationIsMandatory" ng-model="Transaction.CustomerInformation.LastName">
+                                                <div ng-if="paymentForm.customerLastName.$error.required" class="validation-tooltip"><em translate="">CustomerLastNameError</em></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 form-group pg-form-group">
+                                            <div class="pg-form-group-animated">
+                                                <label for="customer_address" class="pg-label" translate="">CustomerAddress</label>
+                                                <input type="text" maxlength="100" form-control="" class="form-control pg-form-control" id="customer_address" name="customerAddress" ng-required="Transaction.CustomerInformation.InformationIsMandatory" ng-model="Transaction.CustomerInformation.StreetAddress">
+                                                <div ng-if="paymentForm.customerAddress.$error.required" class="validation-tooltip"><em translate="">CustomerAddressError</em></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group pg-form-group">
+                                            <div class="pg-form-group-animated">
+                                                <label for="customer_city" class="pg-label" translate="">CustomerCity</label>
+                                                <input type="text" maxlength="50" form-control="" class="form-control pg-form-control" id="customer_city" name="customerCity" ng-required="Transaction.CustomerInformation.InformationIsMandatory" ng-model="Transaction.CustomerInformation.City">
+                                                <div ng-if="paymentForm.customerCity.$error.required" class="validation-tooltip"><em translate="">CustomerCityError</em></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group pg-form-group">
+                                            <div class="pg-form-group-animated">
+                                                <label for="customer_zip" class="pg-label" translate="">CustomerZIP</label>
+                                                <input type="text" maxlength="20" form-control="" class="form-control pg-form-control numInput" id="customer_zip" name="customerZIP" ng-required="Transaction.CustomerInformation.InformationIsMandatory" ng-model="Transaction.CustomerInformation.ZipCode">
+                                                <div ng-if="paymentForm.customerZIP.$error.required" class="validation-tooltip"><em translate="">CustomerZIPError</em></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group pg-form-group">
+                                            <div class="pg-form-group-static">
+                                                <label id="pg-country-combobox" for="customer_country" class="pg-label" translate="">CustomerCountry</label>
+                                                <div class="pg-dropdown-selector pg-selector-box">
+                                                    <select name="customerCountry" select-picker-refresh="UI.Language" selectpicker="" id="customer_country" class="pg-form-select" data-live-search="true" ng-required="Transaction.CustomerInformation.InformationIsMandatory" ng-model="Transaction.CustomerInformation.SelectedCountry" ng-options="country as country.Name for country in Data.Countries track by country.Code" aria-labelledby="pg-country-combobox">
+                                                        <option value="" translate="">CustomerCountryTitle</option>
+                                                    </select>
+                                                    <div ng-if="paymentForm.customerCountry.$error.required" class="validation-tooltip"><em translate="">CustomerCountryError</em></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group pg-form-group">
+                                            <div class="pg-form-group-animated">
+                                                <label for="customer_phone" class="pg-label" translate="">CustomerPhone</label>
+                                                <input type="tel" maxlength="20" inputmode="numeric" form-control="" class="form-control pg-form-control" id="customer_phone" name="customerPhone" ng-required="Transaction.CustomerInformation.InformationIsMandatory" ng-model="Transaction.CustomerInformation.Phone">
+                                                <div ng-if="paymentForm.customerPhone.$error.required" class="validation-tooltip"><em translate="">CustomerPhoneError</em></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group pg-form-group">
+                                            <div class="pg-form-group-animated">
+                                                <label for="customer_email" class="pg-label" translate="">CustomerEmail</label>
+                                                <input type="email" maxlength="254" form-control="" class="form-control pg-form-control" name="customerEmail" id="customer_email" ng-required="Transaction.CustomerInformation.InformationIsMandatory" ng-model="Transaction.CustomerInformation.EmailAddress">
+                                                <div ng-if="paymentForm.customerEmail.$error.required" class="validation-tooltip"><em translate="">CustomerEmailRequiredError</em></div>
+                                                <div ng-if="paymentForm.customerEmail.$error.email" class="validation-tooltip"><em translate="">CustomerEmailInvalidError</em></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 order-md-6 collapse-group collapse pg-payment-buttons-wrapper pg-cc-payment-buttons" collapse="Transaction.PaymentMethod.Type != 'CreditCard'">
+                                <div class="row">
+                                    <div class="col-auto order-md-2"><button class="btn btn-pg-success" type="submit" translate="">SaveAction</button></div>
+                                    <div class="col-auto order-md-1"><button class="btn btn-pg-default" type="button" ng-click="cancelPayment()" translate="">CancelAction</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+                <footer ng-if="UI.Design.ShowFooterText || UI.Design.ShowFooterLogos" role="contentinfo">
+                    <p class="footer-text" ng-if="UI.Design.ShowFooterText" translate="" translate-values="{ipgProviderName: 'HT PayWay'}">FooterText</p>
+                    <div class="footer-logos" ng-if="UI.Design.ShowFooterLogos">
+                        <a ng-if="showCardBrandLogo('Master')" title="Mastercard ID Check" href="https://www.mastercard.us/en-us/consumers/payment-technologies/securecode.html" target="_blank"><span class="sr-only sr-only-focusable" translate="">LinkWillBeOpenedInNewWindow</span><img alt="Mastercard ID Check logo" src="/assets/payment-form/images/payment-info/mastercard-idcheck.png"></a>
+                        <a ng-if="showCardBrandLogo('Visa')" title="Visa Secure" href="https://www.visa.co.uk/pay-with-visa/featured-technologies/verified-by-visa.html" target="_blank"><span class="sr-only sr-only-focusable" translate="">LinkWillBeOpenedInNewWindow</span><img alt="Visa Secure logo" src="/assets/payment-form/images/payment-info/visa-secure.png?v=yc8H37JVn5bXNYGswhAZpeUnh2qvk4tnTxNF6FJTVCE"></a>
+                        <a ng-if="showCardBrandLogo('Diners')" title="Diners Club International ProtectBuy"><img alt="Diners Club International ProtectBuy logo" src="/assets/payment-form/images/payment-info/diners-ProtectBuy.png"></a>
+                        <a ng-if="showCardBrandLogo('Discover')" title="Discover ProtectBuy"><img alt="Discover ProtectBuy logo" src="/assets/payment-form/images/payment-info/discover-ProtectBuy.png"></a>
+                        <a ng-if="showCardBrandLogo('SafeKey')" title="American Express SafeKey"><img alt="American Express SafeKey logo" src="/assets/payment-form/images/payment-info/amex-safeKey.png"></a>
+                        <a title="HT PayWay" target="_blank" href="https://www.hrvatskitelekom.hr/poslovni/ict/payway" class="paywayLogo"><span class="sr-only sr-only-focusable" translate="">LinkWillBeOpenedInNewWindow</span><img alt="HT PayWay logo" src="/assets/payment-form/images/PayWay-logo.png"></a>
+                        <a title="PCI DSS LEVEL 1 - Certified by SIQ"><img alt="PCI DSS LEVEL 1 - Certified by SIQ logo" src="/assets/payment-form/images/payment-info/pci-dss-certified.png"></a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade what-is-countdown" tabindex="-1" role="dialog" aria-labelledby="pg-countdown-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" translate="">CountdownModalContent</div>
+    </div>
+    <div class="modal fade what-is-cvv-modal" tabindex="-1" role="dialog" aria-labelledby="pg-cvv-number-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" translate="">CreditCardVerificationDataModalContent</div>
+    </div>
+    <div class="modal fade instalments-modal" tabindex="-1" role="dialog" aria-labelledby="pg-instalments-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" translate="">NumberOfInstallmentsModalContent</div>
+    </div>
+    <div class="modal fade instalments-graceperiod-modal" tabindex="-1" role="dialog" aria-labelledby="pg-instalments-grace-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" translate="">GracePeriodModalContent</div>
+    </div>
+    <div class="modal fade diners-3ds-eccmobile-mtoken" tabindex="-1" role="dialog" aria-labelledby="pg-diners-3ds-eccmobile-mtoken-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" translate="">Diners3DSECCMobileTokenModalContent</div>
+    </div>
+
+    
+    
+        <script type="text/javascript" src="/js/payment-form/payment-form.min.js?v=HJzKkHqlfWqQqoIjw3xZODJKU2UwlFrHJOSTlwrK2RY"></script></body></html>

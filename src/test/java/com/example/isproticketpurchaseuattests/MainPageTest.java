@@ -1,6 +1,7 @@
 package com.example.isproticketpurchaseuattests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.asserts.SoftAssert;
 
@@ -19,18 +21,25 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class MainPageTest {
     MainPage mainPage = new MainPage();
+
+
     String urlMain = "https://prodaja-test.hzpp.hr/";
 
     SoftAssert softAssert = new SoftAssert();
 
     @BeforeAll        public static void setUpAll() {
         Configuration.browserSize = "1280x800";
+        Configuration.timeout = 90000;
+        Configuration.pageLoadTimeout = 90000;
+        //Configuration.timeout = 300000;
             SelenideLogger.addListener("allure", new AllureSelenide());
         }
 
     @BeforeEach        public void setUp() {
         // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
+        Selenide.clearBrowserCookies();
         Configuration.browserCapabilities = new ChromeOptions().addArguments("--remote-allow-origins=*");
+
 
         open(urlMain);
 
@@ -39,7 +48,6 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeNormalnaKarta() {
-
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -70,7 +78,6 @@ public class MainPageTest {
         //assert should come here
 
         PayWayInfo.fillInfo();
-
         //assert should come here
 
         SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
@@ -97,7 +104,7 @@ public class MainPageTest {
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
         System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        SetDateReturn.setDate(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -198,7 +205,7 @@ public class MainPageTest {
         System.out.println(DifferentDateTime.returnFuture(1));
 
         SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        SetDateReturn.setDate(1);
         mainPage.pretrazi.click();
 
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
@@ -295,7 +302,7 @@ public class MainPageTest {
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
         System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        SetDateReturn.setDate(1);
         mainPage.increasePassengerCount.doubleClick();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -402,7 +409,7 @@ public class MainPageTest {
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
         System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        SetDateReturn.setDate(1);
         mainPage.increasePassengerCount.doubleClick();
         mainPage.decreasePassengerCount.click();
         mainPage.increasePassengerCount.doubleClick();
@@ -510,7 +517,7 @@ public class MainPageTest {
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
         System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        SetDateReturn.setDate(1);
         mainPage.increasePassengerCountSecondary.click();
         mainPage.discountUmirovljenikSecondary.click();
 
@@ -842,7 +849,7 @@ public class MainPageTest {
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
         System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        SetDateReturn.setDate(1);
         mainPage.discountStudentPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -945,7 +952,7 @@ public class MainPageTest {
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
         System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        SetDateReturn.setDate(1);
         mainPage.discountMladiPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -1047,7 +1054,7 @@ public class MainPageTest {
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
         System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        SetDateReturn.setDate(1);
         mainPage.discountUmirovljenikPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!

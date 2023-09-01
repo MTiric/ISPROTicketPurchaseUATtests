@@ -1,0 +1,57 @@
+<html><head>
+    <meta charset="utf-8">
+    <title>HT PayWay</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="HT PayWay">
+    <link rel="apple-touch-icon-precomposed" href="/assets/payment-form/images/PayWay-appleTouch-icon.png">
+    <link rel="icon" href="/assets/payment-form/PayWay-favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="/css/payment-form/PayWay-form-styles.min.css?v=5RnkvxxJOJCRMPTWd_n-xgj56YspH8aidRXU2T3ZPTI">
+    
+        <script src="/assets/shared/js/lib/sentry/sentry-bundle.min.js"></script>
+        <script type="text/javascript">
+            Sentry.init({ dsn: 'https://0e1e5dd501634a10bc3a227d4425bc0c@o316986.ingest.sentry.io/5338531' });
+        </script>
+    
+</head>
+<body class="overflow-hidden">
+    <div id="DefaultPreLoader" class="form-preloader">
+    <div class="form-preloader-wrapper">
+        <div class="spinner-sm"></div>
+        <div class="preloader-text">
+            <span><i></i><i></i><i></i></span>
+        </div>
+    </div>
+</div>
+
+
+        <form name="IPGFormResponse" method="post" action="https://prodaja-test.hzpp.hr/hr/Ticket/PaymentSuccess?StateBasketId=27cbdf74-1e3e-434a-be35-59fdd9c47aa1" target="_self">
+            <input type="hidden" name="CustomerFirstname" value="TestName">
+            <input type="hidden" name="CustomerSurname" value="TestSurname">
+            <input type="hidden" name="CustomerAddress" value="TestAddress 72">
+            <input type="hidden" name="CustomerCountry" value="Croatia">
+            <input type="hidden" name="CustomerZIP" value="735790">
+            <input type="hidden" name="CustomerCity" value="Test City">
+            <input type="hidden" name="CustomerEmail" value="testmail@harakirimail.com">
+            <input type="hidden" name="CustomerPhone" value="099999999">
+            <input type="hidden" name="ShoppingCartID" value="20230901092946-0000007152">
+            <input type="hidden" name="Lang" value="HR">
+            <input type="hidden" name="DateTime" value="20230901093000">
+            <input type="hidden" name="Amount" value="63,48">
+            <input type="hidden" name="ECI" value="5">
+            <input type="hidden" name="STAN" value="116444">
+            <input type="hidden" name="Partner" value="Test">
+            <input type="hidden" name="WsPayOrderId" value="d4c0292e-5e4a-4432-8ea9-c724a9b5259e">
+            <input type="hidden" name="PaymentType" value="VISA">
+            <input type="hidden" name="CreditCardNumber" value="457418------9023">
+            <input type="hidden" name="PaymentPlan" value="0000">
+            <input type="hidden" name="ShopPostedPaymentPlan" value="">
+            <input type="hidden" name="ShopPostedLang" value="HR">
+            <input type="hidden" name="Success" value="1">
+            <input type="hidden" name="ApprovalCode" value="116445">
+            <input type="hidden" name="ErrorMessage" value="">
+            <input type="hidden" name="Signature" value="51c732eefeb841ac96b79e7e68550331f460c94398b03e4e9953ee12c96e1a01d06e1471b840a5b2d87f037af519952b62b91ae935b42b658243eba74983cc0f">
+    </form>
+    <script type="text/javascript">
+        document.forms["IPGFormResponse"].submit();
+    </script></body></html>
