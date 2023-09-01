@@ -7,7 +7,11 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+//import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -27,7 +31,7 @@ public class MainPageTest {
 
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeAll        public static void setUpAll() {
+    @BeforeSuite    public static void setUpAll() {
         Configuration.browserSize = "1280x800";
         Configuration.timeout = 90000;
         Configuration.pageLoadTimeout = 90000;
@@ -35,7 +39,8 @@ public class MainPageTest {
             SelenideLogger.addListener("allure", new AllureSelenide());
         }
 
-    @BeforeEach        public void setUp() {
+    @BeforeMethod
+    public void setUp() {
         // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
         Selenide.clearBrowserCookies();
         Configuration.browserCapabilities = new ChromeOptions().addArguments("--remote-allow-origins=*");
@@ -47,7 +52,7 @@ public class MainPageTest {
     }
 
     @Test
-    public void jednosmjernoPutovanjeNormalnaKarta() {
+    public void jednosmjernoPutovanjeNormalnaKartaTest() {
 
 
         $("#searchViewWrapper").shouldBe(visible);
