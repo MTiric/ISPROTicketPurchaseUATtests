@@ -51,9 +51,9 @@ public class MainPageTest {
 
     }
 
-    @Test
+    @Test(description = "Jednosmjerno putovanje normalna karta")
     public void jednosmjernoPutovanjeNormalnaKartaTest() {
-
+        System.out.println("Jednosmjerno putovanje normalna karta");
 
         $("#searchViewWrapper").shouldBe(visible);
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
@@ -101,7 +101,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeNormalnaKarta() {
-
+        System.out.println("povratnoPutovanjeNormalnaKarta");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -152,7 +152,7 @@ public class MainPageTest {
     }
     @Test
     public void jednosmjernoPutovanjeSviVlakovi() {
-
+        System.out.println("povratnoPutovanjeNormalnaKarta");
 
         $("#searchViewWrapper").shouldBe(visible);
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
@@ -201,7 +201,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeSviVlakovi() {
-
+        System.out.println("povratnoPutovanjeSviVlakovi");
 
         $("#searchViewWrapper").shouldBe(visible);
         $("#returnJourneyRadio").click();
@@ -251,7 +251,7 @@ public class MainPageTest {
     }
     @Test
     public void jednosmjernoPutovanjeTriPutnika() {
-
+        System.out.println("jednosmjernoPutovanjeTriPutnika");
 
         $("#searchViewWrapper").shouldBe(visible);
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
@@ -300,7 +300,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeTriPutnika() {
-
+        System.out.println("povratnoPutovanjeTriPutnika");
 
         $("#searchViewWrapper").shouldBe(visible);
         $("#returnJourneyRadio").click();
@@ -352,7 +352,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeSestPutnika() {
-
+        System.out.println("jednosmjernoPutovanjeSestPutnika");
 
         $("#searchViewWrapper").shouldBe(visible);
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
@@ -407,6 +407,7 @@ public class MainPageTest {
     }
     @Test
     public void povratnoPutovanjeSestPutnika() {
+        System.out.println("povratnoPutovanjeSestPutnika");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -465,6 +466,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeDodatniPutnikDrugiPopust() {
+        System.out.println("jednosmjernoPutovanjeDodatniPutnikDrugiPopust");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -515,6 +517,7 @@ public class MainPageTest {
     }
     @Test
     public void povratnoPutovanjeDodatniPutnikDrugiPopust() {
+        System.out.println("povratnoPutovanjeDodatniPutnikDrugiPopust");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -568,6 +571,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeRezervacijaPrviRazred() {
+        System.out.println("jednosmjernoPutovanjeRezervacijaPrviRazred");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -621,7 +625,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeRezervacijaPrviRazred() {
-
+        System.out.println("povratnoPutovanjeRezervacijaPrviRazred");
 
         $("#searchViewWrapper").shouldBe(visible);
         $("#returnJourneyRadio").click();
@@ -678,7 +682,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeRezervacijaMjestaBicikla() {
-
+        System.out.println("jednosmjernoPutovanjeRezervacijaMjestaBicikla");
 
         $("#searchViewWrapper").shouldBe(visible);
         ParametriPretrage.fillData("Zagreb Glavni kol.", "Split");
@@ -734,6 +738,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeRezervacijaMjestaBicikla() {
+        System.out.println("povratnoPutovanjeRezervacijaMjestaBicikla");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -797,6 +802,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjePopustStudent() {
+        System.out.println("jednosmjernoPutovanjePopustStudent");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -847,6 +853,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjePopustStudent() {
+        System.out.println("povratnoPutovanjePopustStudent");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -900,6 +907,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjePopustMladi() {
+        System.out.println("jednosmjernoPutovanjePopustMladi");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -950,6 +958,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjePopustMladi() {
+        System.out.println("povratnoPutovanjePopustMladi");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1002,6 +1011,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjePopustUmirovljenik() {
+        System.out.println("jednosmjernoPutovanjePopustUmirovljenik");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1052,6 +1062,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjePopustUmirovljenik() {
+        System.out.println("povratnoPutovanjePopustUmirovljenik");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1104,6 +1115,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeRezervacijaLezaj() {
+        System.out.println("jednosmjernoPutovanjeRezervacijaLezaj");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1156,6 +1168,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeRezervacijaLezaj() {
+        System.out.println("povratnoPutovanjeRezervacijaLezaj");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1212,6 +1225,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeOpcionalnaRezervacija_BEZ() {
+        System.out.println("jednosmjernoPutovanjeOpcionalnaRezervacija_BEZ");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1265,6 +1279,7 @@ public class MainPageTest {
 
     @Test
     public void povratnoPutovanjeOpcionalnaRezervacija_BEZ() {
+        System.out.println("povratnoPutovanjeOpcionalnaRezervacija_BEZ");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1320,6 +1335,7 @@ public class MainPageTest {
     }
     @Test
     public void jednosmjernoPutovanjeRegistriraniKorisnik() {
+        System.out.println("jednosmjernoPutovanjeRegistriraniKorisnik");
 
 
         $("#searchViewWrapper").shouldBe(visible);
@@ -1369,6 +1385,7 @@ public class MainPageTest {
 
     @Test
     public void jednosmjernoPutovanjeRezervacijaSjedecMjesta() {
+        System.out.println("jednosmjernoPutovanjeRezervacijaSjedecMjesta");
 
 
         $("#searchViewWrapper").shouldBe(visible);

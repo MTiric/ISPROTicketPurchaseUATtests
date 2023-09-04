@@ -3,6 +3,7 @@
     <test name="HelloWorldTest" preserve-order="true" thread-count="10" parallel="methods">
         <classes>
             <class name="com.example.isproticketpurchaseuattests.MainPageTest"/>
+            <class name="com.example.isproticketpurchaseuattests.NewSetTest"/>
         </classes>
     </test>
 </suite>
