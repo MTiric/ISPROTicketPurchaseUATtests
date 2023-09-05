@@ -5,7 +5,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class UserDataRegistration {
 
-    public static void fillInfo(){
+    public static void fillInfo(String user, String pass){
         $x("//input[@id='fUsername']").sendKeys("matko.tiric@king-ict.hr");
         $x("//input[@id='fPassword']").sendKeys("KingMT329!");
         $x("//button[@id='korisnikSubmitButton']").click();

@@ -5,39 +5,35 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-//import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.asserts.SoftAssert;
 
-import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 
-
 public class MainPageTest {
     MainPage mainPage = new MainPage();
+    EnvironmentDataUAT environmentDataUAT = new EnvironmentDataUAT();
 
 
-    String urlMain = "https://prodaja-test.hzpp.hr/";
+
 
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeSuite    public static void setUpAll() {
+    @BeforeSuite
+    public static void setUpAll() {
         Configuration.browserSize = "1280x800";
         Configuration.timeout = 90000;
         Configuration.pageLoadTimeout = 90000;
         //Configuration.timeout = 300000;
-            SelenideLogger.addListener("allure", new AllureSelenide());
-        }
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
     @BeforeMethod
     public void setUp() {
@@ -45,10 +41,29 @@ public class MainPageTest {
         Selenide.clearBrowserCookies();
         Configuration.browserCapabilities = new ChromeOptions().addArguments("--remote-allow-origins=*");
 
+        System.out.println("\n-----------------------Test start---------------------------\n");
+        open(environmentDataUAT.urlMain);
 
-        open(urlMain);
 
-
+    }
+    @AfterMethod
+    public void status(ITestResult result){
+        try{
+            if(result.getStatus() == ITestResult.SUCCESS){
+                System.out.println("\n##########################\n##########################RESULT: SUCCESS");
+            }
+            else if(result.getStatus() == ITestResult.FAILURE){
+                // Do something here
+                System.out.println("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!RESULT: FAILURE");
+            }
+            else if(result.getStatus() == ITestResult.SKIP ){
+                System.out.println("##########################RESULT: SKIP");
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("\n-----------------------Test finish---------------------------\n");
     }
 
     @Test(description = "Jednosmjerno putovanje normalna karta")
@@ -66,7 +81,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -117,7 +132,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -150,6 +165,7 @@ public class MainPageTest {
 
 
     }
+
     @Test
     public void jednosmjernoPutovanjeSviVlakovi() {
         System.out.println("povratnoPutovanjeNormalnaKarta");
@@ -166,7 +182,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         $("#outwardJourneySelectDep").click();
@@ -216,7 +232,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -249,6 +265,7 @@ public class MainPageTest {
 
 
     }
+
     @Test
     public void jednosmjernoPutovanjeTriPutnika() {
         System.out.println("jednosmjernoPutovanjeTriPutnika");
@@ -264,7 +281,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -316,7 +333,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -372,7 +389,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -405,6 +422,7 @@ public class MainPageTest {
 
 
     }
+
     @Test
     public void povratnoPutovanjeSestPutnika() {
         System.out.println("povratnoPutovanjeSestPutnika");
@@ -430,7 +448,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -482,7 +500,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -515,6 +533,7 @@ public class MainPageTest {
 
 
     }
+
     @Test
     public void povratnoPutovanjeDodatniPutnikDrugiPopust() {
         System.out.println("povratnoPutovanjeDodatniPutnikDrugiPopust");
@@ -535,7 +554,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -586,7 +605,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -641,7 +660,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -697,7 +716,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -758,7 +777,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -817,7 +836,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -870,7 +889,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -922,7 +941,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -975,7 +994,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -1026,7 +1045,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -1079,7 +1098,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -1129,7 +1148,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Osijek → Zagreb Glavni kol.']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Osijek → Zagreb Glavni kol.", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Osijek → Zagreb Glavni kol.", "Relation is not matching");
         //assert should come here
 
         mainPage.selectTrain580.click();
@@ -1184,7 +1203,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Osijek → Zagreb Glavni kol.']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Osijek → Zagreb Glavni kol.", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Osijek → Zagreb Glavni kol.", "Relation is not matching");
         //assert should come here
 
         mainPage.selectTrain580.click();
@@ -1239,7 +1258,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Vinkovci']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Vinkovci", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Vinkovci", "Relation is not matching");
         //assert should come here
 
         mainPage.selectTrain545.click();
@@ -1295,7 +1314,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Vinkovci']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Vinkovci", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Vinkovci", "Relation is not matching");
         //assert should come here
         mainPage.selectTrain545.click();
         mainPage.selectTrain542.click();
@@ -1333,6 +1352,7 @@ public class MainPageTest {
 
 
     }
+
     @Test
     public void jednosmjernoPutovanjeRegistriraniKorisnik() {
         System.out.println("jednosmjernoPutovanjeRegistriraniKorisnik");
@@ -1349,7 +1369,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -1358,7 +1378,7 @@ public class MainPageTest {
         $("#ContinueBtn").click();
         //assert should come here
 
-        UserDataRegistration.fillInfo();
+        UserDataRegistration.fillInfo(environmentDataUAT.registeredUserMail, environmentDataUAT.registeredUserPass);
         //assert should come here
 
         $("#GeneralConditionsOfSale").click();
@@ -1399,7 +1419,7 @@ public class MainPageTest {
         SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching" );
+        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
         //assert should come here
 
         mainPage.selectTrain523.click();
