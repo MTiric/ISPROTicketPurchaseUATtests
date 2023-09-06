@@ -1,16 +1,16 @@
 package com.example.isproticketpurchaseuattests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Driver;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -34,7 +34,6 @@ public class MainPageTest {
         //Configuration.timeout = 300000;
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
-
     @BeforeMethod
     public void setUp() {
         // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
@@ -50,11 +49,11 @@ public class MainPageTest {
     public void status(ITestResult result){
         try{
             if(result.getStatus() == ITestResult.SUCCESS){
-                System.out.println("\n##########################\n##########################RESULT: SUCCESS");
+                System.out.println("\n\nRESULT: SUCCESS");
             }
             else if(result.getStatus() == ITestResult.FAILURE){
                 // Do something here
-                System.out.println("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!RESULT: FAILURE");
+                System.out.println("\n##############################\n##########################RESULT: FAILURE");
             }
             else if(result.getStatus() == ITestResult.SKIP ){
                 System.out.println("##########################RESULT: SKIP");
@@ -63,6 +62,7 @@ public class MainPageTest {
         catch(Exception e){
             e.printStackTrace();
         }
+
         System.out.println("\n-----------------------Test finish---------------------------\n");
     }
 
@@ -1457,4 +1457,9 @@ public class MainPageTest {
     }
     //new tests come here
 
+    @AfterTest
+    public static void close(){
+        closeWindow();
+        closeWebDriver();
+    }
 }

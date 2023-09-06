@@ -1,0 +1,50 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.example:demo >--------------------------
+[INFO] Building demo 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ demo ---
+[INFO] skip non existing resourceDirectory D:\My projects Code\Selenium\ISPROTicketPurchaseUATtests\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ demo ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ demo ---
+[INFO] skip non existing resourceDirectory D:\My projects Code\Selenium\ISPROTicketPurchaseUATtests\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ demo ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- surefire:2.22.2:test (default-test) @ demo ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.isproticketpurchaseuattests.MainPageTest
+
+-----------------------Test start---------------------------
+
+Jednosmjerno putovanje normalna karta
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 76.456 s - in com.example.isproticketpurchaseuattests.MainPageTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:19 min
+[INFO] Finished at: 2023-09-05T15:14:37+02:00
+[INFO] ------------------------------------------------------------------------

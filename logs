@@ -1,0 +1,439 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.example:demo >--------------------------
+[INFO] Building demo 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ demo ---
+[INFO] skip non existing resourceDirectory D:\My projects Code\Selenium\ISPROTicketPurchaseUATtests\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ demo ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ demo ---
+[INFO] skip non existing resourceDirectory D:\My projects Code\Selenium\ISPROTicketPurchaseUATtests\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ demo ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 11 source files with javac [debug target 17] to target\test-classes
+[INFO] 
+[INFO] --- surefire:2.22.2:test (default-test) @ demo ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.isproticketpurchaseuattests.MainPageTest
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeDodatniPutnikDrugiPopust
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+Jednosmjerno putovanje normalna karta
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeOpcionalnaRezervacija_BEZ
+06.09.2023.
+Zagreb Glavni kol. ? Vinkovci
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjePopustMladi
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjePopustStudent
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjePopustUmirovljenik
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeRegistriraniKorisnik
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeRezervacijaLezaj
+06.09.2023.
+Osijek ? Zagreb Glavni kol.
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeRezervacijaMjestaBicikla
+06.09.2023.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!RESULT: FAILURE
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeRezervacijaPrviRazred
+06.09.2023.
+Zagreb Glavni kol. ? Split
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeRezervacijaSjedecMjesta
+06.09.2023.
+Zagreb Glavni kol. ? Split
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeSestPutnika
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeNormalnaKarta
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+jednosmjernoPutovanjeTriPutnika
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeDodatniPutnikDrugiPopust
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeNormalnaKarta
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeOpcionalnaRezervacija_BEZ
+06.09.2023.
+Zagreb Glavni kol. ? Vinkovci
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjePopustMladi
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjePopustStudent
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjePopustUmirovljenik
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeRezervacijaLezaj
+06.09.2023.
+Osijek ? Zagreb Glavni kol.
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeRezervacijaMjestaBicikla
+06.09.2023.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!RESULT: FAILURE
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeRezervacijaPrviRazred
+06.09.2023.
+Zagreb Glavni kol. ? Split
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeSestPutnika
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeSviVlakovi
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+
+-----------------------Test start---------------------------
+
+povratnoPutovanjeTriPutnika
+06.09.2023.
+Zagreb Glavni kol. ? Sesvete
+Uspješno ste dovršili kupnju. Hvala Vam i sretan put!
+
+##########################
+##########################RESULT: SUCCESS
+
+-----------------------Test finish---------------------------
+
+[ERROR] Tests run: 26, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 1,223.457 s <<< FAILURE! - in com.example.isproticketpurchaseuattests.MainPageTest
+[ERROR] jednosmjernoPutovanjeRezervacijaMjestaBicikla(com.example.isproticketpurchaseuattests.MainPageTest)  Time elapsed: 95.266 s  <<< FAILURE!
+com.codeborne.selenide.ex.ElementNotFound: 
+Element not found {By.xpath: //h4[text()='Zagreb Glavni kol. ? Split']}
+Expected: exist
+Screenshot: file:/D:/My%20projects%20Code/Selenium/ISPROTicketPurchaseUATtests/build/reports/tests/1693915508002.0.png
+Page source: file:/D:/My%20projects%20Code/Selenium/ISPROTicketPurchaseUATtests/build/reports/tests/1693915508002.0.html
+Timeout: 90 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//h4[text()='Zagreb Glavni kol. ? Split']"}
+	at com.example.isproticketpurchaseuattests.MainPageTest.jednosmjernoPutovanjeRezervacijaMjestaBicikla(MainPageTest.java:717)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+no such element: Unable to locate element: {"method":"xpath","selector":"//h4[text()='Zagreb Glavni kol. ? Split']"}
+  (Session info: chrome=116.0.5845.141)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.9.0', revision: 'd7057100a6'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.4'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [5e5989f9aa36ad02e7428367cc5d4832, findElement {using=xpath, value=//h4[text()='Zagreb Glavni kol. ? Split']}]
+Capabilities {acceptInsecureCerts: true, browserName: chrome, browserVersion: 116.0.5845.141, chrome: {chromedriverVersion: 116.0.5845.96 (1a3918166880..., userDataDir: C:\Users\MATKO~1.TIR\AppDat...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:59852}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:59852/devtoo..., se:cdpVersion: 116.0.5845.141, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 5e5989f9aa36ad02e7428367cc5d4832
+	at com.example.isproticketpurchaseuattests.MainPageTest.jednosmjernoPutovanjeRezervacijaMjestaBicikla(MainPageTest.java:717)
+
+[ERROR] povratnoPutovanjeRezervacijaMjestaBicikla(com.example.isproticketpurchaseuattests.MainPageTest)  Time elapsed: 96.478 s  <<< FAILURE!
+com.codeborne.selenide.ex.ElementNotFound: 
+Element not found {By.xpath: //h4[text()='Zagreb Glavni kol. ? Split']}
+Expected: exist
+Screenshot: file:/D:/My%20projects%20Code/Selenium/ISPROTicketPurchaseUATtests/build/reports/tests/1693916079447.1.png
+Page source: file:/D:/My%20projects%20Code/Selenium/ISPROTicketPurchaseUATtests/build/reports/tests/1693916079447.1.html
+Timeout: 90 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//h4[text()='Zagreb Glavni kol. ? Split']"}
+	at com.example.isproticketpurchaseuattests.MainPageTest.povratnoPutovanjeRezervacijaMjestaBicikla(MainPageTest.java:778)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+no such element: Unable to locate element: {"method":"xpath","selector":"//h4[text()='Zagreb Glavni kol. ? Split']"}
+  (Session info: chrome=116.0.5845.141)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.9.0', revision: 'd7057100a6'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.4'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [5e5989f9aa36ad02e7428367cc5d4832, findElement {using=xpath, value=//h4[text()='Zagreb Glavni kol. ? Split']}]
+Capabilities {acceptInsecureCerts: true, browserName: chrome, browserVersion: 116.0.5845.141, chrome: {chromedriverVersion: 116.0.5845.96 (1a3918166880..., userDataDir: C:\Users\MATKO~1.TIR\AppDat...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:59852}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:59852/devtoo..., se:cdpVersion: 116.0.5845.141, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 5e5989f9aa36ad02e7428367cc5d4832
+	at com.example.isproticketpurchaseuattests.MainPageTest.povratnoPutovanjeRezervacijaMjestaBicikla(MainPageTest.java:778)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   MainPageTest.jednosmjernoPutovanjeRezervacijaMjestaBicikla:717 Element not found {By.xpath: //h4[text()='Zagreb Glavni kol. ? Split']}
+Expected: exist
+Screenshot: file:/D:/My%20projects%20Code/Selenium/ISPROTicketPurchaseUATtests/build/reports/tests/1693915508002.0.png
+Page source: file:/D:/My%20projects%20Code/Selenium/ISPROTicketPurchaseUATtests/build/reports/tests/1693915508002.0.html
+Timeout: 90 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//h4[text()='Zagreb Glavni kol. ? Split']"}
+[ERROR]   MainPageTest.povratnoPutovanjeRezervacijaMjestaBicikla:778 Element not found {By.xpath: //h4[text()='Zagreb Glavni kol. ? Split']}
+Expected: exist
+Screenshot: file:/D:/My%20projects%20Code/Selenium/ISPROTicketPurchaseUATtests/build/reports/tests/1693916079447.1.png
+Page source: file:/D:/My%20projects%20Code/Selenium/ISPROTicketPurchaseUATtests/build/reports/tests/1693916079447.1.html
+Timeout: 90 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//h4[text()='Zagreb Glavni kol. ? Split']"}
+[INFO] 
+[ERROR] Tests run: 26, Failures: 2, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20:59 min
+[INFO] Finished at: 2023-09-05T14:17:36+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test (default-test) on project demo: There are test failures.
+[ERROR] 
+[ERROR] Please refer to D:\My projects Code\Selenium\ISPROTicketPurchaseUATtests\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
