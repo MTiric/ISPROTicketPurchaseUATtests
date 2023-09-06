@@ -1,27 +1,21 @@
 package com.example.isproticketpurchaseuattests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Driver;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterAll;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 
 public class MainPageTest {
     MainPage mainPage = new MainPage();
     EnvironmentDataUAT environmentDataUAT = new EnvironmentDataUAT();
-
-
 
 
     SoftAssert softAssert = new SoftAssert();
@@ -34,6 +28,7 @@ public class MainPageTest {
         //Configuration.timeout = 300000;
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
+
     @BeforeMethod
     public void setUp() {
         // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
@@ -45,21 +40,19 @@ public class MainPageTest {
 
 
     }
+
     @AfterMethod
-    public void status(ITestResult result){
-        try{
-            if(result.getStatus() == ITestResult.SUCCESS){
+    public void status(ITestResult result) {
+        try {
+            if (result.getStatus() == ITestResult.SUCCESS) {
                 System.out.println("\n\nRESULT: SUCCESS");
-            }
-            else if(result.getStatus() == ITestResult.FAILURE){
+            } else if (result.getStatus() == ITestResult.FAILURE) {
                 // Do something here
                 System.out.println("\n##############################\n##########################RESULT: FAILURE");
-            }
-            else if(result.getStatus() == ITestResult.SKIP ){
+            } else if (result.getStatus() == ITestResult.SKIP) {
                 System.out.println("##########################RESULT: SKIP");
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -70,18 +63,19 @@ public class MainPageTest {
     public void jednosmjernoPutovanjeNormalnaKartaTest() {
         System.out.println("Jednosmjerno putovanje normalna karta");
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
+
         SetDateOutward.setDate(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -119,20 +113,18 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjeNormalnaKarta");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -170,19 +162,17 @@ public class MainPageTest {
     public void jednosmjernoPutovanjeSviVlakovi() {
         System.out.println("povratnoPutovanjeNormalnaKarta");
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
 
         $x("//input[@id='DirectTrains'][@value='false']").click(); //clicks on "All trains" radio button(svi vlakovi)
-        System.out.println(DifferentDateTime.returnFuture(1));
 
         SetDateOutward.setDate(1);
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
 
         $("#outwardJourneySelectDep").click();
@@ -219,20 +209,18 @@ public class MainPageTest {
     public void povratnoPutovanjeSviVlakovi() {
         System.out.println("povratnoPutovanjeSviVlakovi");
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         $x("//input[@id='DirectTrains'][@value='false']").click(); //clicks on "All trains" radio button(svi vlakovi)
-        System.out.println(DifferentDateTime.returnFuture(1));
 
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(1);
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -270,18 +258,16 @@ public class MainPageTest {
     public void jednosmjernoPutovanjeTriPutnika() {
         System.out.println("jednosmjernoPutovanjeTriPutnika");
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         mainPage.increasePassengerCount.doubleClick();
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -319,10 +305,9 @@ public class MainPageTest {
     public void povratnoPutovanjeTriPutnika() {
         System.out.println("povratnoPutovanjeTriPutnika");
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(1);
         mainPage.increasePassengerCount.doubleClick();
@@ -330,10 +315,7 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -371,9 +353,8 @@ public class MainPageTest {
     public void jednosmjernoPutovanjeSestPutnika() {
         System.out.println("jednosmjernoPutovanjeSestPutnika");
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         mainPage.increasePassengerCount.doubleClick();
         mainPage.decreasePassengerCount.click();
@@ -386,10 +367,7 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -428,10 +406,9 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjeSestPutnika");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(1);
         mainPage.increasePassengerCount.doubleClick();
@@ -445,10 +422,7 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -487,9 +461,8 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjeDodatniPutnikDrugiPopust");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         mainPage.increasePassengerCountSecondary.click();
         mainPage.discountStudentSecondary.click();
@@ -497,10 +470,7 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -539,10 +509,9 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjeDodatniPutnikDrugiPopust");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(1);
         mainPage.increasePassengerCountSecondary.click();
@@ -551,10 +520,7 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -593,20 +559,17 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjeRezervacijaPrviRazred");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Split");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
         SetDateOutward.setDate(1);
         mainPage.selectFirstClass.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
-        //assert should come here
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
 
         mainPage.firstOdaberiButton.click();
         //assert should come here
@@ -646,22 +609,20 @@ public class MainPageTest {
     public void povratnoPutovanjeRezervacijaPrviRazred() {
         System.out.println("povratnoPutovanjeRezervacijaPrviRazred");
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Split");
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
         mainPage.selectFirstClass.click();
-        System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(2);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
-        //assert should come here
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
+
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
         //assert should come here
@@ -703,20 +664,18 @@ public class MainPageTest {
     public void jednosmjernoPutovanjeRezervacijaMjestaBicikla() {
         System.out.println("jednosmjernoPutovanjeRezervacijaMjestaBicikla");
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Split");
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
         mainPage.additionalOptionsOutward.click();//makes bicycle toggle button visible
         mainPage.toggleBicycleOutward.click();//activates bicycle toggle button
-        System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -760,25 +719,24 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjeRezervacijaMjestaBicikla");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Split");
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
         mainPage.additionalOptionsOutward.click();//makes bicycle outward toggle button visible
         mainPage.toggleBicycleOutward.click();//activates bicycle toggle button
         mainPage.additionalOptionsReturn.click();//makes bicycle return toggle button visible
         mainPage.toggleBicycleReturn.click();
-        System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(2);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
-        //assert should come here
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
+
+
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
         //assert should come here
@@ -824,19 +782,15 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjePopustStudent");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         mainPage.discountStudentPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -875,10 +829,9 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjePopustStudent");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(1);
         mainPage.discountStudentPrimary.click();
@@ -886,10 +839,7 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -929,19 +879,15 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjePopustMladi");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         mainPage.discountMladiPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -980,10 +926,9 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjePopustMladi");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(1);
         mainPage.discountMladiPrimary.click();
@@ -991,10 +936,7 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -1033,19 +975,15 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjePopustUmirovljenik");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         mainPage.discountUmirovljenikPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -1084,10 +1022,9 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjePopustUmirovljenik");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(1);
         mainPage.discountUmirovljenikPrimary.click();
@@ -1095,10 +1032,7 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
         mainPage.firstOdaberiButton.click();
         mainPage.lastOdaberiButton.click();
@@ -1137,9 +1071,8 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjeRezervacijaLezaj");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
+        MainPageAssert.assertMainPage();
         ParametriPretrage.fillData("Osijek", "Zagreb Glavni kol.");
-        System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -1190,10 +1123,9 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjeRezervacijaLezaj");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
+        MainPageAssert.assertMainPage();
+        PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage.fillData("Osijek", "Zagreb Glavni kol.");
-        System.out.println(DifferentDateTime.returnFuture(1));
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(2);
 
@@ -1247,18 +1179,16 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjeOpcionalnaRezervacija_BEZ");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Vinkovci");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Vinkovci");
         SetDateOutward.setDate(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Vinkovci']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Vinkovci", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
 
         mainPage.selectTrain545.click();
@@ -1301,17 +1231,19 @@ public class MainPageTest {
         System.out.println("povratnoPutovanjeOpcionalnaRezervacija_BEZ");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        $("#returnJourneyRadio").click();
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Vinkovci");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+
+        PovratnoPutovanje.odaberiPovratno();
+
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Vinkovci");
+
         SetDateOutward.setDate(1);
         SetDateReturn.setDate(2);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Vinkovci']");
+        SelenideElement searchRelation = $x("//h4[text()='"+parametriPretrage.polaznaStanica+ " → Vinkovci']");
         String searchRelationActualResult = searchRelation.getText();
         System.out.println(searchRelationActualResult);
         softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Vinkovci", "Relation is not matching");
@@ -1358,18 +1290,14 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjeRegistriraniKorisnik");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Sesvete");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
         SetDateOutward.setDate(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Sesvete']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Sesvete", "Relation is not matching");
+
         //assert should come here
 
         mainPage.firstOdaberiButton.click();
@@ -1408,19 +1336,17 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjeRezervacijaSjedecMjesta");
 
 
-        $("#searchViewWrapper").shouldBe(visible);
-        ParametriPretrage.fillData("Zagreb Glavni kol.", "Split");
-        System.out.println(DifferentDateTime.returnFuture(1));
+        MainPageAssert.assertMainPage();
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
         SetDateOutward.setDate(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Zagreb Glavni kol. → Split']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Split", "Relation is not matching");
-        //assert should come here
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
+
 
         mainPage.selectTrain523.click();
         //assert should come here
@@ -1458,7 +1384,7 @@ public class MainPageTest {
     //new tests come here
 
     @AfterTest
-    public static void close(){
+    public static void close() {
         closeWindow();
         closeWebDriver();
     }

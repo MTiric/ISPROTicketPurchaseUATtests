@@ -8,5 +8,6 @@ public class SetDateOutward {
     public static void setDate(int dateDifference){
         $("#DepartureDate").clear();
         $("#DepartureDate").sendKeys(DifferentDateTime.returnFuture(dateDifference), Keys.ENTER);//this inputs tomorrow date
+        System.out.println("Datum putovanja polazno: " + DifferentDateTime.returnFuture(dateDifference));
     }
 }
