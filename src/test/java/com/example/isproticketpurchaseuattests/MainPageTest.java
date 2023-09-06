@@ -67,7 +67,7 @@ public class MainPageTest {
 
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
 
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -81,28 +81,23 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -116,8 +111,8 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(1);
+        Date.setDateOutward(1);
+        Date.setDateReturn(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -131,28 +126,23 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -165,9 +155,9 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
 
-        $x("//input[@id='DirectTrains'][@value='false']").click(); //clicks on "All trains" radio button(svi vlakovi)
+        ParametriPretrage.selectAllTrains();
 
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
         mainPage.pretrazi.click();
 
         softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
@@ -175,31 +165,26 @@ public class MainPageTest {
                 "Relation is not matching");
         //assert should come here
 
-        $("#outwardJourneySelectDep").click();
+        mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -212,10 +197,10 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        $x("//input[@id='DirectTrains'][@value='false']").click(); //clicks on "All trains" radio button(svi vlakovi)
+        ParametriPretrage.selectAllTrains();
 
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(1);
+        Date.setDateOutward(1);
+        Date.setDateReturn(1);
         mainPage.pretrazi.click();
 
         softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
@@ -227,13 +212,12 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
@@ -245,10 +229,9 @@ public class MainPageTest {
         System.out.println(titleConfirmationText);
         softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!", "The purchased screen title is not matching");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -260,7 +243,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
         mainPage.increasePassengerCount.doubleClick();
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -273,29 +256,24 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -308,8 +286,8 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(1);
+        Date.setDateOutward(1);
+        Date.setDateReturn(1);
         mainPage.increasePassengerCount.doubleClick();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -322,28 +300,23 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -355,7 +328,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
         mainPage.increasePassengerCount.doubleClick();
         mainPage.decreasePassengerCount.click();
         mainPage.increasePassengerCount.doubleClick();
@@ -373,29 +346,24 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -409,8 +377,8 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(1);
+        Date.setDateOutward(1);
+        Date.setDateReturn(1);
         mainPage.increasePassengerCount.doubleClick();
         mainPage.decreasePassengerCount.click();
         mainPage.increasePassengerCount.doubleClick();
@@ -429,28 +397,23 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -463,7 +426,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
         mainPage.increasePassengerCountSecondary.click();
         mainPage.discountStudentSecondary.click();
 
@@ -476,29 +439,24 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -512,8 +470,8 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(1);
+        Date.setDateOutward(1);
+        Date.setDateReturn(1);
         mainPage.increasePassengerCountSecondary.click();
         mainPage.discountUmirovljenikSecondary.click();
 
@@ -527,28 +485,23 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -561,7 +514,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
         mainPage.selectFirstClass.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -574,7 +527,7 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.freeReservationSpot.click();
@@ -583,23 +536,18 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -613,8 +561,8 @@ public class MainPageTest {
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
         mainPage.selectFirstClass.click();
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        Date.setDateOutward(1);
+        Date.setDateReturn(2);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -628,7 +576,7 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.freeReservationSpot.click();
@@ -638,23 +586,18 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -668,7 +611,7 @@ public class MainPageTest {
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
         mainPage.additionalOptionsOutward.click();//makes bicycle toggle button visible
         mainPage.toggleBicycleOutward.click();//activates bicycle toggle button
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -681,7 +624,7 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.freeReservationSpot.click();
@@ -692,23 +635,18 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -726,8 +664,8 @@ public class MainPageTest {
         mainPage.toggleBicycleOutward.click();//activates bicycle toggle button
         mainPage.additionalOptionsReturn.click();//makes bicycle return toggle button visible
         mainPage.toggleBicycleReturn.click();
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        Date.setDateOutward(1);
+        Date.setDateReturn(2);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -741,7 +679,7 @@ public class MainPageTest {
         mainPage.lastOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.freeReservationSpot.click();
@@ -755,23 +693,18 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -784,7 +717,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
         mainPage.discountStudentPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -796,29 +729,24 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -832,8 +760,8 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(1);
+        Date.setDateOutward(1);
+        Date.setDateReturn(1);
         mainPage.discountStudentPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -846,28 +774,23 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -881,7 +804,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
         mainPage.discountMladiPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -893,29 +816,24 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -929,8 +847,8 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(1);
+        Date.setDateOutward(1);
+        Date.setDateReturn(1);
         mainPage.discountMladiPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -943,28 +861,23 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -977,7 +890,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
         mainPage.discountUmirovljenikPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -989,29 +902,24 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -1025,8 +933,8 @@ public class MainPageTest {
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(1);
+        Date.setDateOutward(1);
+        Date.setDateReturn(1);
         mainPage.discountUmirovljenikPrimary.click();
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
@@ -1039,28 +947,23 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -1072,22 +975,21 @@ public class MainPageTest {
 
 
         MainPageAssert.assertMainPage();
-        ParametriPretrage.fillData("Osijek", "Zagreb Glavni kol.");
-        SetDateOutward.setDate(1);
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Osijek", "Zagreb Glavni kol.");
+        Date.setDateOutward(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Osijek → Zagreb Glavni kol.']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Osijek → Zagreb Glavni kol.", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
 
         mainPage.selectTrain580.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.freeReservationCouchetteSpot.click();
@@ -1096,23 +998,19 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -1125,24 +1023,23 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
-        ParametriPretrage.fillData("Osijek", "Zagreb Glavni kol.");
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Osijek", "Zagreb Glavni kol.");
+        Date.setDateOutward(1);
+        Date.setDateReturn(2);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='Osijek → Zagreb Glavni kol.']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Osijek → Zagreb Glavni kol.", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
 
         mainPage.selectTrain580.click();
         mainPage.selectTrain985.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.freeReservationCouchetteSpot.click();
@@ -1152,23 +1049,18 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -1181,7 +1073,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Vinkovci");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -1194,7 +1086,7 @@ public class MainPageTest {
         mainPage.selectTrain545.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.selectNoReservation.click();
@@ -1204,23 +1096,18 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -1237,8 +1124,8 @@ public class MainPageTest {
 
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Vinkovci");
 
-        SetDateOutward.setDate(1);
-        SetDateReturn.setDate(2);
+        Date.setDateOutward(1);
+        Date.setDateReturn(2);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -1253,7 +1140,7 @@ public class MainPageTest {
         //assert should come here
 
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.selectNoReservation.click();
@@ -1263,23 +1150,18 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
 
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -1292,7 +1174,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Sesvete");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -1303,29 +1185,24 @@ public class MainPageTest {
         mainPage.firstOdaberiButton.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         UserDataRegistration.fillInfo(environmentDataUAT.registeredUserMail, environmentDataUAT.registeredUserPass);
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 
@@ -1338,7 +1215,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
-        SetDateOutward.setDate(1);
+        Date.setDateOutward(1);
 
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
@@ -1351,7 +1228,7 @@ public class MainPageTest {
         mainPage.selectTrain523.click();
         //assert should come here
 
-        $("#ContinueBtn").click();
+        mainPage.continueAfterTrainSelect.click();
         //assert should come here
 
         mainPage.freeReservationSeat.click();
@@ -1360,23 +1237,18 @@ public class MainPageTest {
         UserDataNoRegistration.fillInfo();
         //assert should come here
 
-        $("#GeneralConditionsOfSale").click();
-        $("#SubmitForm").click();
+        ConditionsOfSaleScreen.acceptGeneralConditionsOfSale();
         //assert should come here
 
         PayWayInfo.fillInfo();
 
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
 
-        $x("//input[@id='pdfBtn']").click();
+        MainPageAssert.downloadTicket();
 
 
-        sleep(5000);
         softAssert.assertAll();
 
 

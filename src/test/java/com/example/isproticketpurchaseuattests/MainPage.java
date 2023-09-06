@@ -71,4 +71,5 @@ public class MainPage {
 
   public SelenideElement selectNoReservationReturn = $x("//div[@class='panel panel-default'][last()]//input[@class='checkboxNoReservations']");
 
+  public SelenideElement continueAfterTrainSelect = $("#ContinueBtn");
 }

@@ -18,4 +18,15 @@ public class MainPageAssert {
         System.out.println(searchRelationActualResult);
         return searchRelationActualResult;
     }
+
+    public static String assertPurchase(){
+        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
+        String titleConfirmationText = titleConfirmation.getText();
+        System.out.println(titleConfirmationText);
+        return titleConfirmationText;
+    }
+
+    public static void downloadTicket(){
+        $x("//input[@id='pdfBtn']").click();
+    }
 }

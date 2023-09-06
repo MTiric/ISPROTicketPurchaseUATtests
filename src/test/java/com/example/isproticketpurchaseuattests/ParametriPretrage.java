@@ -18,4 +18,8 @@ public class ParametriPretrage {
         $x("//label[text()='Polazni kolodvor']/following-sibling::span/input").sendKeys(odlazno);
         $x("//label[text()='Odredišni kolodvor']/following-sibling::span/input").sendKeys(povratno);
     }
+
+    public static void selectAllTrains(){
+        $x("//input[@id='DirectTrains'][@value='false']").click(); //clicks on "All trains" radio button(svi vlakovi)
+    }
 }
