@@ -224,11 +224,7 @@ public class MainPageTest {
         PayWayInfo.fillInfo();
         //assert should come here
 
-        SelenideElement titleConfirmation = $x("//div[@class=\"title_confirmation\"]");
-        String titleConfirmationText = titleConfirmation.getText();
-        System.out.println(titleConfirmationText);
-        softAssert.assertEquals(titleConfirmationText, "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!", "The purchased screen title is not matching");
-
+        softAssert.assertEquals(MainPageAssert.assertPurchase(), "Uspješno ste dovršili kupnju. Hvala Vam i sretan put!");
         MainPageAssert.downloadTicket();
 
 
@@ -531,7 +527,7 @@ public class MainPageTest {
         //assert should come here
 
         mainPage.freeReservationSpot.click();
-        $x("//a[@id='reservationSubmitBtn']").click();
+        mainPage.continueReservation.click();
 
         UserDataNoRegistration.fillInfo();
         //assert should come here
@@ -1130,10 +1126,9 @@ public class MainPageTest {
         //!!!!!^^^^^^^^^!!!!!all the search parameters have to go before this point!!!!!^^^^^^^^^!!!!!
         mainPage.pretrazi.click();
 
-        SelenideElement searchRelation = $x("//h4[text()='"+parametriPretrage.polaznaStanica+ " → Vinkovci']");
-        String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
-        softAssert.assertEquals(searchRelationActualResult, "Zagreb Glavni kol. → Vinkovci", "Relation is not matching");
+        softAssert.assertEquals(MainPageAssert.assertSearch(parametriPretrage.polaznaStanica, parametriPretrage.odredisnaStanica),
+                parametriPretrage.polaznaStanica + " → " + parametriPretrage.odredisnaStanica,
+                "Relation is not matching");
         //assert should come here
         mainPage.selectTrain545.click();
         mainPage.selectTrain542.click();
