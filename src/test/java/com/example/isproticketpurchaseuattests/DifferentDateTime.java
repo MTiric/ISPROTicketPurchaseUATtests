@@ -9,14 +9,16 @@ public class DifferentDateTime {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
         LocalDateTime now = LocalDateTime.now();
+        LocalDateTime desiredDay = now.plusDays(plusDays);
         LocalDateTime tomorrow;
-        DayOfWeek day = now.getDayOfWeek();
+        DayOfWeek day = desiredDay.getDayOfWeek();
         String dayString = day.toString();
 
-        if(dayString == "FRIDAY" || dayString == "SATURDAY"){
+        if(dayString == "SUNDAY" || dayString == "SATURDAY"){
             System.out.println(dayString);
             tomorrow = now.plusDays(plusDays+2);
         }else{
+            System.out.println(dayString);
             tomorrow = now.plusDays(plusDays);
         }
 

@@ -5,6 +5,8 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
@@ -34,7 +36,7 @@ public class MainPageTest {
     public void setUp() {
         // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
         Selenide.clearBrowserCookies();
-        //Configuration.browserCapabilities = new FirefoxOptions().addArguments("--remote-allow-origins=*");
+        //Configuration.browserCapabilities = new ChromeOptions().addArguments("--remote-allow-origins=*");
 
         System.out.println("\n-----------------------Test start---------------------------\n");
         open(environmentDataUAT.urlMain);
@@ -1253,6 +1255,8 @@ public class MainPageTest {
 
     @AfterTest
     public static void close() {
+        WebDriver driver=new ChromeDriver();
+        driver.close(); //closes the browser
         closeWindow();
         closeWebDriver();
     }
