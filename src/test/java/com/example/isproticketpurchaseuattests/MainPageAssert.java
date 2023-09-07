@@ -15,7 +15,7 @@ public class MainPageAssert {
     public static String assertSearch(String polaznaStanica, String povratnaStanica){
         SelenideElement searchRelation = $x("//h4[text()='" + polaznaStanica + " → " + povratnaStanica +"']");
         String searchRelationActualResult = searchRelation.getText();
-        System.out.println(searchRelationActualResult);
+        System.out.println("Dobiveni rezultat nakon pretrage: " + searchRelationActualResult);
         return searchRelationActualResult;
     }
 

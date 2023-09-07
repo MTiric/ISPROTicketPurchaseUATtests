@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -33,7 +34,7 @@ public class MainPageTest {
     public void setUp() {
         // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
         Selenide.clearBrowserCookies();
-        Configuration.browserCapabilities = new ChromeOptions().addArguments("--remote-allow-origins=*");
+        //Configuration.browserCapabilities = new FirefoxOptions().addArguments("--remote-allow-origins=*");
 
         System.out.println("\n-----------------------Test start---------------------------\n");
         open(environmentDataUAT.urlMain);
