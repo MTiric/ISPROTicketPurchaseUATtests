@@ -1260,4 +1260,5 @@ public class MainPageTest {
         closeWindow();
         closeWebDriver();
     }
+    //test for commit
 }
