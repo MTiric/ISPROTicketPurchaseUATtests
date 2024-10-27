@@ -25,7 +25,7 @@ public class MainPageTest {
 
     @BeforeSuite
     public static void setUpAll() {
-        Configuration.browserSize = "1280x800";
+        Configuration.browserSize = "1920x1080";
         Configuration.timeout = 90000;
         Configuration.pageLoadTimeout = 90000;
         //Configuration.timeout = 300000;
@@ -607,7 +607,7 @@ public class MainPageTest {
         System.out.println("jednosmjernoPutovanjeRezervacijaMjestaBicikla");
 
         MainPageAssert.assertMainPage();
-        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Virovitica");
         mainPage.additionalOptionsOutward.click();//makes bicycle toggle button visible
         mainPage.toggleBicycleOutward.click();//activates bicycle toggle button
         Date.setDateOutward(1);
@@ -658,7 +658,7 @@ public class MainPageTest {
 
         MainPageAssert.assertMainPage();
         PovratnoPutovanje.odaberiPovratno();
-        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Split");
+        ParametriPretrage parametriPretrage = new ParametriPretrage("Zagreb Glavni kol.", "Virovitica");
         mainPage.additionalOptionsOutward.click();//makes bicycle outward toggle button visible
         mainPage.toggleBicycleOutward.click();//activates bicycle toggle button
         mainPage.additionalOptionsReturn.click();//makes bicycle return toggle button visible
@@ -1260,5 +1260,5 @@ public class MainPageTest {
         closeWindow();
         closeWebDriver();
     }
-    //test for commit
+    //test for commit 2
 }
